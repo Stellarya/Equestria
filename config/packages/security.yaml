@@ -1,0 +1,46 @@
+security:
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        our_db_provider:
+            entity:
+                class: App\Entity\User
+                property: username
+    firewalls:
+        main:
+            pattern:    ^/
+            provider: our_db_provider
+            anonymous: ~
+            form_login:
+                login_path: app_login
+                check_path: app_login
+            logout:
+                path: app_logout
+                target: index
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
+
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
+
+    role_hierarchy:
+        ROLE_CAVALIER: [ ROLE_USER ]
+        ROLE_PROPRIETAIRE: [ ROLE_CAVALIER ]
+        ROLE_ELEVEUR: [ ROLE_PROPRIETAIR ]
+        ROLE_ADMIN: [ ROLE_ELEVEUR ]
+
+          # activate different ways to authenticate
+          # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+          # https://symfony.com/doc/current/security/impersonating_user.html
+        # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+    # - { path: /idea/ajouter, roles: ROLE_USER }
+    # - { path: ^/profile, roles: ROLE_USER }

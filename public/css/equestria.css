@@ -1,0 +1,153 @@
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+/*
+
+Couleurs
+Jet: #292929
+Platinium: #EBEBEB
+Davys Grey: #494949
+Sonic Silver: #7C7A7A
+Rosewood: #6600E
+ */
+body {
+    font-family: Roboto;
+}
+
+.page {
+    height: 100%;
+    overflow: hidden;
+}
+
+#sidebar {
+    background-color: #292929;
+    width: 230px;
+    transition: all 0.2s;
+    position: relative;
+    z-index: 2;
+}
+
+.sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+.nav-title {
+    width: 200px;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.side-menu {
+    overflow: hidden;
+
+}
+
+.side-menu.side-menu-bottom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.nav-item {
+    width: 231px;
+
+}
+
+
+.nav-item a {
+    color: #EBEBEB;
+    padding: 8px 10px 8px 22px;
+    display: flex;
+}
+.nav-item a:hover {
+    color: #494949;
+    padding: 8px 10px 8px 22px;
+    display: flex;
+    text-decoration: none;
+}
+
+.nav-item a i {
+    width: 23px;
+    margin-right: 10px;
+
+    font-size: 23px;
+}
+.nav-item a i::before {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.nav-item span {
+    font-size: 1em;
+}
+
+.nav-item span:hover, .nav-item span.active {
+    background: hsla(0, 0%, 100%, .2);
+    cursor: pointer;
+}
+
+#content {
+    width: calc(100% - 70px);
+    background: #EBEBEB;
+    transition: width 0.2s;
+}
+
+#content .nav-tabs-app {
+    background: white;
+    border-bottom: 1px solid slategrey;
+    position: sticky;
+    top: 0;
+
+}
+
+#content .tab-content {
+    padding: 20px;
+}
+
+#content .box {
+    background: #fff;
+    border-radius: 4px;
+    line-height: normal;
+}
+
+
+#content .box .box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+#content .box .box-header.box-separate {
+    border-bottom: 1px solid #e6e9ed;
+}
+
+#content .box .box-header .box-title {
+    font-size: 17px;
+    font-weight: 500;
+}
+
+#content .box .box-header .box-actions {
+
+    min-width: fit-content;
+}
+#content .box .box-header .box-actions a {
+    margin-left: 10px;
+}
+
+#content .box .box-header .box-actions a:hover {
+    color: hotpink;
+}
+#content.nav-md #sidebar{
+    width: 230px;
+    transition: all 0.2s;
+}
+
+
+#content.nav-md #sidebar .nav-title {
+    width: 230px;
+}
+
+#content.nav-md #sidebar .nav-item span{
+    visibility: visible !important;
+}

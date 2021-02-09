@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Equestria{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/equestria.css') }}">
+
+        <link rel="stylesheet" href="{{ asset('lib/bootstrap-4.5.0-dist/css/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ asset('lib/bootstrap-select-1.13.9/dist/css/bootstrap-select.min.css') }}">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="{{ asset('lib/font-awesome/css/all.css') }}">
+        <!-- Popover-x -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('lib/Popover-X/css/bootstrap-popover-x.min.css') }}">
+
+        <!-- jQuery UI - Pour l'autocompletion -->
+        <link rel="stylesheet" href="{{ asset('lib/jquery-ui-1.12.1/jquery-ui.min.css') }}">
+        <!-- jQuery 3.5.1 -->
+        <script src="{{ asset('/lib/jquery-3.5.1/jquery-3.5.1.min.js') }}"></script>
+
+        <!-- Datatable -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('lib/dataTables/datatables.min.css') }}">
+        <link rel="shortcut icon" href="{{ asset('images/faviconGoldmine.ico') }}">
+
+    {% endblock %}
+</head>
+<body>
+<div class="page d-flex nav-md">
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <div class="sticky">
+            {% include 'sidebar.html.twig' %}
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div id="content">
+        {# display any flash message #}
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        {% block contenu %}{% endblock %}
+    </div>
+</div>
+
+{% block javascripts %}
+    <script src="{{ asset('/lib/bootstrap-4.5.0-dist/js/bootstrap.bundle.js') }}"></script>
+    <!-- Boostrap-select -->
+    <script src="{{ asset('lib/bootstrap-select-1.13.9/dist/js/bootstrap-select.js') }}"></script>
+
+    <!-- JQuery UI - Pour l'auto completion -->
+    <script src="{{ asset('lib/jquery-ui-1.12.1/jquery-ui.js') }}"></script>
+    <!-- echarts -->
+    <script src="{{ asset('/lib/echarts/dist/echarts.js') }}"></script>
+    <!-- font-awesome -->
+    <script src="{{ asset('/lib/font-awesome/js/fontawesome.js') }}"></script>
+    <!--datatables-->
+    <script type="text/javascript" src="{{ asset('/lib/dataTables/datatables.js') }}"></script>
+
+    <!-- Popover-x - confirmation -->
+    <script src="{{ asset('/lib/Popover-X/js/bootstrap-popover-x.min.js') }}"></script>
+    <!-- Masonry -->
+    <script src="{{ asset('/lib/masonry-4.2.2/masonry.min.js') }}"></script>
+
+    <script src="{{ asset('js/utils.js') }}"></script>
+{% endblock %}
+</body>
+</html>
