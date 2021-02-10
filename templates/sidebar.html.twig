@@ -1,61 +1,42 @@
-<div class="nav-title text-center fixed-top">
+<div class="nav-title text-center fixed-top mb-4">
     <a href="#">
         <img src="{{ asset('img/logo.png') }}" alt="logo" class="logo mb-4 mt-4" style="width: 150px">
     </a>
 </div>
-<nav class="side-menu side-menu-top fixed-bottom" style="width: 250px">
-    <div class="nav-item" title="Tableau de Bord" data-value="dashboard" id="dashboard">
-        <a href="#" class="align-items-baseline">
-            <i class="fas fa-tachometer-alt"></i>
-            <span>Tableau de bord</span>
-        </a>
-    </div>
-    <div class="nav-item" title="Tableau de Bord" data-value="dashboard" id="profil">
-        <a href="#" class="align-items-baseline">
-            <i class="fas fa-horse-head"></i>
-            <span>Chevaux</span>
-        </a>
-    </div>
-    <div class="nav-item" title="Tableau de Bord" data-value="dashboard" id="chevaux">
-        <a href="#" class="align-items-baseline">
-            <i class="fas fa-users"></i>
-            <span>Propriétaires</span>
-        </a>
-    </div>
-    <div class="nav-item" title="Tableau de Bord" data-value="dashboard" id="centre">
-        <a href="#" class="align-items-baseline">
-            <i class="fas fa-venus-mars"></i>
-            <span>Reproduction</span>
-        </a>
-    </div>
+<nav class="side-menu side-menu-top fixed" style="width: 250px; margin-top: 90px">
+    {% import 'macros/layout.html.twig' as navItem %}
+    {{ navItem.navItem('fas fa-tachometer-alt', 'Tableau de bord', '' ) }}
+    {{ navItem.navItem('fas fa-horse', 'Chevaux', 'cheval_list' ) }}
+    {{ navItem.navItem('fas fa-users', 'Proprietaires') }}
 
-
-    {# {% set user = app.user.username %} #}
-    <div class="nav-item" title="Tableau de Bord" data-value="dashboard" id="centre">
-        <a href="#" class="align-items-baseline">
-            <i class="fas fa-user"></i>
-            <span>User</span>
-        </a>
-    </div>
-    <div class="nav-item" title="Tableau de Bord" data-value="dashboard" id="centre">
-        <a href="{{ path('inscription') }}" class="align-items-baseline">
-            <i class="fas fa-user-plus"></i>
-            <span>S'inscrire</span>
-        </a>
-    </div>
-    <div class="nav-item" title="Tableau de Bord" data-value="dashboard" id="centre">
-        <a href="{{ path('app_login') }}" class="align-items-baseline">
-            <i class="fas fa-user"></i>
-            <span>Connexion</span>
-        </a>
-    </div>
-    <div class="nav-item" title="Tableau de Bord" data-value="dashboard" id="centre">
-        <a href="{{ path('app_logout') }}" class="align-items-baseline">
-            <i class="fas fa-user-slash"></i>
-            <span>Deconnexion</span>
-        </a>
-    </div>
-    <div style="margin-bottom: 500px"></div>
+    {% if app.user %}
+        {% set user = app.user.username %}
+        <div class="nav-item" title="Tableau de Bord" data-value="dashboard" id="user">
+            <a href="#" class="align-items-baseline">
+                <i class="fas fa-user"></i>
+                <span>{{ user }}</span>
+            </a>
+        </div>
+        <div class="nav-item" title="Tableau de Bord" data-value="dashboard" id="deconnexion">
+            <a href="{{ path('app_logout') }}" class="align-items-baseline">
+                <i class="fas fa-user-slash"></i>
+                <span>Deconnexion</span>
+            </a>
+        </div>
+    {% else %}
+        <div class="nav-item" title="Tableau de Bord" data-value="dashboard" id="inscription">
+            <a href="{{ path('inscription') }}" class="align-items-baseline">
+                <i class="fas fa-user-plus"></i>
+                <span>S'inscrire</span>
+            </a>
+        </div>
+        <div class="nav-item" title="Tableau de Bord" data-value="dashboard" id="connexion">
+            <a href="{{ path('app_login') }}" class="align-items-baseline">
+                <i class="fas fa-user"></i>
+                <span>Connexion</span>
+            </a>
+        </div>
+    {% endif %}
 
     {# {{ navItem.navItem('fas fa-sign-out-alt', 'Déconnexion', 'ROLE_GUEST', 'app_logout'  ) }} #}
 

@@ -1,0 +1,148 @@
+{# left sidebar #}
+{% macro navItem(icon, label, link, idItem = null ) %}
+
+    <div class="nav-item " title="{{ label }}" data-value="{{ label }}"
+            {% if idItem != null %} id="{{ idItem }}"{% endif %}>
+
+        <a {% if link != null %}href="{{ path(link) }}" {% endif %}>
+            <i class="{{ icon }}"></i>
+            <span>{{ label }}</span>
+        </a>
+    </div>
+
+{% endmacro %}
+
+{# tabs #}
+{% macro navItemTabs(icon, label, link,active, params = {}) %}
+    <li class="nav-item text-truncate">
+        <a class="nav-link {{ active }} text-truncate" data-toggle="tab" href="#{{ link }}" title="{{ label }}">
+            <i class="{{ icon }}"></i>
+            <span class="d-none d-lg-inline text-truncate">{{ label }}</span>
+        </a>
+    </li>
+{% endmacro %}
+
+
+{# button #}
+{% macro button(datavalue, label, class, icon) %}
+    <div data-value="{{ datavalue }}" class="btn {{ class }}">
+        <i class="{{ icon }}"></i>
+        {{ label }}
+    </div>
+{% endmacro %}
+
+{# addButton #}
+{% macro addButton(id, options = '') %}
+    <button class="btn btn-secondary btn-round d-none d-sm-block" id="{{ id }}" title="Ajouter {{ options }}">
+        <i class="fa fa-plus"></i>
+    </button>
+{% endmacro %}
+
+{# exportButton #}
+{% macro exportButton(id) %}
+    <button class="btn btn-primary btn-round px-0 mr-2 ml-2" id="{{ id }}"
+            title="Exporter les données en .xlsx">
+        <i class="fa fa-file-excel"></i>
+    </button>
+{% endmacro %}
+
+{# updateButton #}
+{% macro updateButton(id) %}
+    <a id="{{ id }}" data-value="{{ id }}" role="button" aria-expanded="false" title="Modifier"
+       class="details_button_size">
+        <i class="fas fa-pencil-alt"></i>
+    </a>
+{% endmacro %}
+
+{# deleteButton #}
+{% macro deleteButton(id) %}
+    <a id="{{ id }}" data-value="{{ id }}" title="Supprimer" role="button" class="details_button_size">
+        <i class="fas fa-trash"></i>
+    </a>
+{% endmacro %}
+
+{# deleteFileButton #}
+{% macro deleteFileButton(id, type) %}
+    <a id="{{ id }}" data-value="{{ id }}" class="btn btn-round ml-2 mr-2">
+        <i class="fa fa-times" title="Supprimer {{ type }}"></i>
+    </a>
+{% endmacro %}
+
+{# deleteFinleInModaleButton #}
+{% macro deleteFileIneModaleButton(id, label) %}
+    <button type="button" class="btn btn-large btn-danger mr-2 d-sm-none d-md-block" id="{{ id }}">
+        {{ label }}
+    </button>
+{% endmacro %}
+
+{# anonymizeButton #}
+{% macro anonymizeButton(id) %}
+    <a id="{{ id }}" data-value="{{ id }}" title="Anonymiser" role="button" class="details_button_size">
+        <i class="fas fa-eye-slash"></i>
+    </a>
+{% endmacro %}
+
+{# duplicateButton #}
+{% macro duplicateButton(id) %}
+    <a id="{{ id }}" role="button" title="Dupliquer" class="details_button_size">
+        <i class="fas fa-copy"></i>
+    </a>
+{% endmacro %}
+
+{# popover #}
+{% macro popover(id, header, content) %}
+    <div id="{{ id }}" class="popover popover-x popover-default">
+        <div class="arrow"></div>
+        <div class="popover-header popover-title">
+            <button class="close"
+                    data-dismiss="popover-x">&times;
+            </button>
+            {{ header }}
+        </div>
+        <div class="popover-body popover-content">
+            <p>{{ content }}</p>
+        </div>
+        <div class="popover-footer">
+            <button type="submit" class="btn btn-sm btn-success">Confirmer</button>
+        </div>
+    </div>
+{% endmacro %}
+
+{# toggle #}
+{% macro toggleActif(name, target, label) %}
+    <!-- toggle actifs -->
+    <div class="d-flex align-items-center justify-content-center">
+        <label class="switch">
+            <input type="checkbox" data-value="toggle" name="{{ name }}" data-target="{{ target }}">
+            <span class="slider round"></span>
+        </label>
+        <span class="ml-2">{{ label }}</span>
+    </div>
+    <!-- /toggle actifs -->
+{% endmacro %}
+
+{# commentaire #}
+{% macro commentaire(idForm, label, infoCommentaire = true,  id, name, texte = '', idButton, formCommentaire, enabled, name = true) %}
+    <form method="POST" id="{{ idForm }}">
+        <div class="form-group">
+            <h6 class="font-weight-bold">{{ label }}
+                {% if infoCommentaire %}
+                    <i class="fas fa-exclamation-circle"
+                       style="color: #C5C7CB; font-size: 75%; cursor: pointer;"
+                       title="Ne pas employer de propos injurieux ou pouvant porter atteinte à la personne désignée."></i>
+                {% endif %}
+            </h6>
+            <label for="{{ id }}"></label>
+            <textarea class="form-control" id="{{ id }}" name="{{ name }}" maxlength="10000"
+                      rows="15" {% if not is_granted('ROLE_RH') %} {{ enabled }} {% endif %}>{{ texte ? texte }}</textarea>
+        </div>
+
+        <p id="counter"></p>
+        <button class="btn btn-secondary d-none d-sm-block" id="{{ idButton }}"
+                value="submit" {% if name %} name="submit" {% endif %}
+                form="{{ formCommentaire }}"
+                style="display: none!important;">
+            Enregistrer
+        </button>
+    </form>
+{% endmacro %}

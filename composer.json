@@ -11,6 +11,7 @@
         "doctrine/doctrine-bundle": "^2.2",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.8",
+        "omines/datatables-bundle": "^0.5.3",
         "sensio/framework-extra-bundle": "^6.0",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "5.2.*",
@@ -31,6 +32,7 @@
         "symfony/var-dumper": "5.2.*",
         "symfony/web-profiler-bundle": "5.2.*",
         "symfony/yaml": "5.2.*",
+        "twbs/bootstrap": "4.6.0",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
     },
@@ -74,7 +76,7 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
+            "allow-contrib": true,
             "require": "5.2.*"
         }
     }

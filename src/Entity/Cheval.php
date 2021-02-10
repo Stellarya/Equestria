@@ -43,11 +43,6 @@ class Cheval
     private $taille;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $sexe;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $isReproducteur;
@@ -62,7 +57,18 @@ class Cheval
      * @ORM\ManyToOne(targetEntity=Robe::class)
      * @ORM\JoinColumn(nullable=false)
      */
-    private $Robe;
+    private $robe;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Specialite::class, inversedBy="chevaux")
+     */
+    private $specialite;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Sexe::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $sexe;
 
     public function getId(): ?int
     {
@@ -129,18 +135,6 @@ class Cheval
         return $this;
     }
 
-    public function getSexe(): ?string
-    {
-        return $this->sexe;
-    }
-
-    public function setSexe(string $sexe): self
-    {
-        $this->sexe = $sexe;
-
-        return $this;
-    }
-
     public function getIsReproducteur(): ?bool
     {
         return $this->isReproducteur;
@@ -167,12 +161,36 @@ class Cheval
 
     public function getRobe(): ?Robe
     {
-        return $this->Robe;
+        return $this->robe;
     }
 
-    public function setRobe(?Robe $Robe): self
+    public function setRobe(?Robe $robe): self
     {
-        $this->Robe = $Robe;
+        $this->robe = $robe;
+
+        return $this;
+    }
+
+    public function getSpecialite(): ?Specialite
+    {
+        return $this->specialite;
+    }
+
+    public function setSpecialite(?Specialite $specialite): self
+    {
+        $this->specialite = $specialite;
+
+        return $this;
+    }
+
+    public function getSexe(): ?Sexe
+    {
+        return $this->sexe;
+    }
+
+    public function setSexe(?Sexe $sexe): self
+    {
+        $this->sexe = $sexe;
 
         return $this;
     }

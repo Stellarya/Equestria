@@ -1,4 +1,5 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
 /*
 
 Couleurs
@@ -6,7 +7,7 @@ Jet: #292929
 Platinium: #EBEBEB
 Davys Grey: #494949
 Sonic Silver: #7C7A7A
-Rosewood: #6600E
+Rosewood: #66000E
  */
 body {
     font-family: Roboto;
@@ -25,63 +26,67 @@ body {
     z-index: 2;
 }
 
-.sticky {
-    position: sticky;
+#sidebar .sticky {
+    position: fixed;
     top: 0;
+    left: 0;
     height: 100vh;
+    background-color: #292929;
 }
 
-.nav-title {
+#sidebar .sticky .nav-title {
     width: 200px;
     overflow: hidden;
     padding: 10px;
 }
 
-.side-menu {
+#sidebar .sticky .side-menu {
     overflow: hidden;
 
 }
 
-.side-menu.side-menu-bottom {
+#sidebar .sticky .side-menu.side-menu-bottom {
     position: absolute;
     bottom: 0;
     width: 100%;
 }
 
-.nav-item {
+#sidebar .sticky .side-menu .nav-item {
     width: 231px;
 
 }
 
-
-.nav-item a {
+#sidebar .sticky .side-menu .nav-item a {
     color: #EBEBEB;
     padding: 8px 10px 8px 22px;
     display: flex;
 }
-.nav-item a:hover {
+
+#sidebar .sticky .side-menu .nav-item a:hover {
     color: #494949;
     padding: 8px 10px 8px 22px;
     display: flex;
     text-decoration: none;
 }
 
-.nav-item a i {
+#sidebar .sticky .side-menu .nav-item a svg {
     width: 23px;
     margin-right: 10px;
 
     font-size: 23px;
 }
-.nav-item a i::before {
+
+#sidebar .sticky .side-menu .nav-item a i::before {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.nav-item span {
+
+#sidebar .sticky .side-menu .nav-item span {
     font-size: 1em;
 }
 
-.nav-item span:hover, .nav-item span.active {
+#sidebar .sticky .side-menu .nav-item span:hover, #sidebar .sticky .side-menu .nav-item span.active {
     background: hsla(0, 0%, 100%, .2);
     cursor: pointer;
 }
@@ -90,6 +95,8 @@ body {
     width: calc(100% - 70px);
     background: #EBEBEB;
     transition: width 0.2s;
+    margin-left: 40px;
+    height: 100vh !important;
 }
 
 #content .nav-tabs-app {
@@ -97,7 +104,6 @@ body {
     border-bottom: 1px solid slategrey;
     position: sticky;
     top: 0;
-
 }
 
 #content .tab-content {
@@ -108,6 +114,7 @@ body {
     background: #fff;
     border-radius: 4px;
     line-height: normal;
+
 }
 
 
@@ -131,6 +138,7 @@ body {
 
     min-width: fit-content;
 }
+
 #content .box .box-header .box-actions a {
     margin-left: 10px;
 }
@@ -138,7 +146,8 @@ body {
 #content .box .box-header .box-actions a:hover {
     color: hotpink;
 }
-#content.nav-md #sidebar{
+
+#content.nav-md #sidebar {
     width: 230px;
     transition: all 0.2s;
 }
@@ -148,6 +157,40 @@ body {
     width: 230px;
 }
 
-#content.nav-md #sidebar .nav-item span{
+#content.nav-md #sidebar .nav-item span {
     visibility: visible !important;
+}
+
+/*PANELS*/
+
+.nav-tabs {
+    border: none;
+    flex-wrap: nowrap;
+}
+
+.nav-tabs .nav-item {
+    margin-bottom: 0;
+    white-space: nowrap;
+    flex: 1;
+    text-align: center;
+}
+
+.nav-tabs .nav-link {
+    font-size: 15px;
+    background-color: #eee;
+    border: 1px solid transparent;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    margin-right: 2px;
+}
+
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-link:hover {
+    background: #66000E;
+    color: white
+}
+
+.btn .btn-secondary {
+    background: #66000E;
 }
