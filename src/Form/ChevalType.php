@@ -5,11 +5,14 @@ namespace App\Form;
 use App\Entity\Cheval;
 use App\Entity\Race;
 use App\Entity\Robe;
+use App\Entity\Sexe;
 use App\Repository\RaceRepository;
 use App\Repository\RobeRepository;
+use App\Repository\SexeRepository;
 use Doctrine\DBAL\Types\BooleanType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -21,12 +24,14 @@ class ChevalType extends AbstractType {
         $builder
             ->add('nom', TextType::class, array('attr' => array('maxLength' => 250)))
             ->add('affixe', TextType::class, array('attr' => array('maxLength' => 250)))
-            ->add('poids', IntegerType::class)
-            ->add('taille', IntegerType::class)
-            ->add('sexe', TextType::class, array('attr' => array('maxLength' => 250)))
+            ->add('poids', IntegerType::class, array('required' => false))
+            ->add('taille', IntegerType::class, array('required' => false))
+            ->add('isPureRace', CheckboxType::class, array('required' => false))
+            ->add('isReproducteur', CheckboxType::class, array('required' => false))
             ->add('enregistrer', SubmitType::class);
         $this->addRace($builder);
         $this->addRobe($builder);
+        $this->addSexe($builder);
     }
 
     public function configureOptions (OptionsResolver $resolver) {
@@ -34,6 +39,7 @@ class ChevalType extends AbstractType {
             'data_class' => Cheval::class,
         ]);
     }
+
     private function addRobe (FormBuilderInterface $builder) {
         $oCheval = $builder->getData();
         $oRobe = $oCheval->getRobe();
@@ -45,7 +51,7 @@ class ChevalType extends AbstractType {
                         ->orderBy('r.libelle');
                 },
                 'choice_label' => function ($robe) {
-                    return $robe->getLibelle() ;
+                    return $robe->getLibelle();
                 }));
         } else {
             $builder->add('robe', EntityType::class, array('class' => Robe::class,
@@ -70,7 +76,7 @@ class ChevalType extends AbstractType {
                         ->orderBy('rc.libelle');
                 },
                 'choice_label' => function ($race) {
-                    return $race->getLibelle() ;
+                    return $race->getLibelle();
                 }));
         } else {
             $builder->add('race', EntityType::class, array('class' => Race::class,
@@ -83,5 +89,31 @@ class ChevalType extends AbstractType {
                 }));
         }
     }
+
+    private function addSexe (FormBuilderInterface $builder) {
+        $oCheval = $builder->getData();
+        $oSexe = $oCheval->getSexe();
+        if ($oCheval->getId() != NULL && $oSexe) {
+            $builder->add('sexe', EntityType::class, array('class' => Sexe::class,
+                'query_builder' => function (SexeRepository $r) use ($oSexe) {
+                    return $r->createQueryBuilder('sx')
+                        ->where('sx.id=' . $oSexe->getId())
+                        ->orderBy('sx.libelle');
+                },
+                'choice_label' => function ($sexe) {
+                    return $sexe->getLibelle();
+                }));
+        } else {
+            $builder->add('sexe', EntityType::class, array('class' => Sexe::class,
+                'query_builder' => function (SexeRepository $r) {
+                    return $r->createQueryBuilder('sx')
+                        ->orderBy('sx.libelle');
+                },
+                'choice_label' => function ($sexe) {
+                    return $sexe->getLibelle();
+                }));
+        }
+    }
+
 
 }

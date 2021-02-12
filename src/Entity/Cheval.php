@@ -28,7 +28,7 @@ class Cheval
     private $affixe;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $isPureRace;
 
@@ -43,7 +43,7 @@ class Cheval
     private $taille;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $isReproducteur;
 

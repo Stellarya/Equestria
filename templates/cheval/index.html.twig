@@ -1,0 +1,53 @@
+{% extends "base.html.twig" %}
+
+{% block contenu %}
+    <div id="conteneurModale"></div>
+    <!-- content -->
+    <div class="container-fluid p-0">
+        <div class="nav-tabs-app">
+            <div class="d-flex flex-column flex-md-row">
+                <h2 class="title">
+                    {{ title }}
+                </h2>
+                {% import 'macros/layout.html.twig' as macros %}
+                <ul class="nav nav-tabs flex-fill" id="nav_tdb">
+                    {{ macros.navItemTabs('fas fa-industry', 'Cheval', 'listeCheval', 'active'  ) }}
+                    {{ macros.navItemTabs('fas fa-award', 'Ajouter', 'ajouter', ''  ) }}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="listeCheval">
+                {{ render(controller("App\\Controller\\ChevalController::list")) }}
+            </div>
+            <div class="tab-pane fade" id="ajouter">
+                {% include 'cheval/ajouter.html.twig' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        let countClick = 0;
+
+        // --- ONGLETS ET HASH -------------------------------------------------------------------------------------
+        let hash = window.location.hash;
+
+        // Positionne directement sur le bon tab quand on appelle l'url avec un tag (ex : #tagTechnique)
+        hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+
+        $('a[data-toggle=tab]').click(function () {
+            $(this).tab('show');
+            let scrollmem = $('body').scrollTop();
+            window.location.hash = this.hash;
+            $('html, body').scrollTop(scrollmem);
+        });
+        $(document).ready(function () {
+            activeSidebar('{{ navItemValue }}');
+        })
+    </script>
+{% endblock %}

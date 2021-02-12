@@ -6,7 +6,7 @@
 <nav class="side-menu side-menu-top fixed" style="width: 250px; margin-top: 90px">
     {% import 'macros/layout.html.twig' as navItem %}
     {{ navItem.navItem('fas fa-tachometer-alt', 'Tableau de bord', '' ) }}
-    {{ navItem.navItem('fas fa-horse', 'Chevaux', 'cheval_list' ) }}
+    {{ navItem.navItem('fas fa-horse', 'Chevaux', 'cheval_index' ) }}
     {{ navItem.navItem('fas fa-users', 'Proprietaires') }}
 
     {% if app.user %}
@@ -39,5 +39,4 @@
     {% endif %}
 
     {# {{ navItem.navItem('fas fa-sign-out-alt', 'Déconnexion', 'ROLE_GUEST', 'app_logout'  ) }} #}
-
 </nav>
