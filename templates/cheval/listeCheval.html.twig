@@ -1,10 +1,12 @@
 <div id="conteneurModale"></div>
 <div class="container-fluid">
-    {% import 'macros/layout.html.twig' as macros %}
     <div class="box mt-2 p-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2>{{ title }}</h2>
-            {{ macros.addButton('ajouterCheval') }}
+            <a href="{{ path('cheval_add') }}" class="btn btn-secondary btn-round">
+                <i class="fas fa-horse-head"></i>
+                <span>Ajouter Cheval</span>
+            </a>
         </div>
         <table class="table table-striped table-hover"
                id="tblChevaux" width="100%">
@@ -14,6 +16,7 @@
                 <th>Nom</th>
                 <th>Affixe</th>
                 <th>Sexe</th>
+                <th>Reproducteur</th>
                 <th>Robe</th>
                 <th>Race</th>
                 <th>Pure Race</th>
@@ -33,6 +36,7 @@
                                 {% elseif cheval.sexe.id == 2 %} fa-genderless
                                 {% else %} fa-venus {% endif %}"></i>
                     </td>
+                    <td><i class="fas {% if cheval.isReproducteur %} fa-check {% else %} fa-times {% endif %}"></i></td>
                     <td>{{ cheval.robe.libelle }}</td>
                     <td>{{ cheval.race.libelle }}</td>
                     <td><i class="fas {% if cheval.isPureRace %} fa-check {% else %} fa-times {% endif %}"></i></td>
@@ -45,33 +49,3 @@
         </table>
     </div>
 </div>
-{% block javascripts %}
-    <script>
-        function getModaleCheval(id) {
-            if (countClick === 0) {
-                $.post("{{ path('cheval_modale') }}", {
-                        idEntity: id, // id de l'enregistrement à modifier
-                    }, mf1, // fonction de retour.
-                    'html'); // Format des données reçues.
-
-                function mf1(code_html) {
-                    $("#conteneurModale").html(code_html); // On passe code_html au conteneur de modale
-                    $("#modalAjouterCheval").modal({ // On affiche la modale
-                        backdrop: 'static'
-                    });
-
-                    $('.close').on('click', function () {
-                        countClick = 0;
-                    });
-                }
-            }
-            countClick++;
-        }
-        $(document).ready(function () {
-            $('#ajouterCheval').on('click', () => {
-                getModaleCheval(-1);
-            });
-        })
-    </script>
-
-{% endblock %}

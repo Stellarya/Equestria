@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Cheval;
+use App\Entity\Idea;
 use App\Form\ChevalType;
+use App\Form\IdeaType;
 use App\Repository\ChevalRepository;
 use App\Repository\RaceRepository;
 use App\Repository\RobeRepository;
@@ -69,113 +71,51 @@ class ChevalController extends AbstractController {
 
     /**
      * @Route("/add", name="_add")
-     * Retourne le formulaire d'ajout d'un cheval
+     * Renvoie la modale et les variables nécessaires
      *
      * @param Request $request
-     * @param ChevalRepository $chevalRepository
      * @return Response
      */
-    public function getModalAjoutCheval (Request $request, ChevalRepository $chevalRepository) {
+    public function ajouter (Request $request): Response {
+
+        $idEntity = $request->get('idEntity');
 
         $oCheval = new Cheval();
 
-        $formCheval = $this->createForm(ChevalType::class, $oCheval, array(
-            'action' => $this->generateUrl('cheval_form_submit', array(
-                'idCheval' => -1
-            ))
-        ));
+        $form = $this->createForm(ChevalType::class, $oCheval, array(
+            'action' => $this->generateUrl('cheval_form_submit'
+            )));
 
         return $this->render('cheval/ajouter.html.twig', [
-            'formCheval' => $formCheval->createView()
+            'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/modale", name="_modale")
-     * Retourne le formulaire d'ajout d'un cheval
+     * @Route("/form/submit", name="_form_submit")
      *
      * @param Request $request
-     * @param ChevalRepository $chevalRepository
-     * @return Response
-     */
-    public function getModalCheval (Request $request, ChevalRepository $chevalRepository) {
-        $idCheval = $request->get('idCheval');
-
-        if ($idCheval == -1) {
-            $oCheval = new Cheval();
-        } else {
-            $oCheval = $chevalRepository->find($idCheval);
-
-            if (!$idCheval) {
-                throw $this->createNotFoundException('Erreur ! Cheval introuvable');
-            }
-        }
-        $formCheval = $this->createForm(ChevalType::class, $oCheval, array(
-            'action' => $this->generateUrl('cheval_form_submit', array(
-                'idCheval' => $idCheval
-            ))
-        ));
-
-        return $this->render('cheval/ajouter.html.twig', [
-            'formCheval' => $formCheval->createView()
-        ]);
-    }
-
-//    /**
-//     * @Route("/update", name="_update")
-//     * Retourne le formulaire d'ajout d'un cheval
-//     *
-//     * @param Request $request
-//     * @param ChevalRepository $chevalRepository
-//     * @return Response
-//     */
-//    public function getModalModifCheval (Request $request, ChevalRepository $chevalRepository) {
-//        $idCheval = $request->get('idCheval');
-//
-//        $formCheval = $this->createForm(ChevalType::class, $oCheval, array(
-//            'action' => $this->generateUrl('cheval_form_submit', array(
-//                'idCheval' => $idCheval
-//            ))
-//        ));
-//
-//        return $this->render('cheval/ajouter.html.twig', [
-//            'formCheval' => $formCheval->createView()
-//        ]);
-//    }
-
-    /**
-     * @Route("/{idCheval}/form/submit", name="_form_submit", requirements={"idCheval"="-?\d+"})
-     *
-     * @param Request $request
-     * @param $idCheval
-     * @param ChevalRepository $chevalRepository
      * @return RedirectResponse
      */
-    public function submitFormCheval (Request $request, $idCheval, ChevalRepository $chevalRepository) {
-        if (-1 == $idCheval) {
-            $oCheval = new Cheval();
-        } else {
-            $oCheval = $chevalRepository->find($idCheval);
-        }
+    public function submitFormCheval (Request $request): RedirectResponse {
+        $oCheval = new Cheval();
 
-        if ($oCheval->getSexe()->getLibelle() == 'Hongre') {
-            $oCheval->setIsReproducteur(false);
-        }
+        $form = $this->createForm(ChevalType::class, $oCheval);
+        $form->handleRequest($request);
 
-        $formCheval = $this->createForm(ChevalType::class, $oCheval);
-        $formCheval->handleRequest($request);
-
-        if ($formCheval->isSubmitted() && $formCheval->isValid()) {
-
+        if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($oCheval);
             $entityManager->flush();
 
+            $this->addFlash('success', "Idée ajoutée avec succès.");
             return $this->redirect(
                 $this->generateUrl('cheval_details', array('id' => $oCheval->getId()))
             );
+
+
         } else {
-            throw new Exception("Formulaire invalide.");
+            $this->addFlash('danger', "Idée ne peux pas etre ajoutée.");
         }
     }
 
