@@ -8,12 +8,6 @@
     {{ navItem.navItem('fas fa-tachometer-alt', 'Tableau de bord', '' ) }}
     {{ navItem.navItem('fas fa-horse', 'Chevaux', 'cheval_index' ) }}
     {{ navItem.navItem('fas fa-users', 'Proprietaires') }}
-    <div class="nav-item" title="Tableau de Bord" data-value="dashboard" id="addCheval">
-        <a href="{{ path('cheval_add') }}" class="align-items-baseline">
-            <i class="fas fa-horse-head"></i>
-            <span>Ajouter Cheval</span>
-        </a>
-    </div>
 
     {% if app.user %}
         {% set user = app.user.username %}

@@ -23,11 +23,6 @@ class Cheval
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $affixe;
-
-    /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $isPureRace;
@@ -70,6 +65,11 @@ class Cheval
      */
     private $sexe;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Affixe::class, inversedBy="chevaux")
+     */
+    private $affixe;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -83,18 +83,6 @@ class Cheval
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getAffixe(): ?string
-    {
-        return $this->affixe;
-    }
-
-    public function setAffixe(?string $affixe): self
-    {
-        $this->affixe = $affixe;
 
         return $this;
     }
@@ -191,6 +179,18 @@ class Cheval
     public function setSexe(?Sexe $sexe): self
     {
         $this->sexe = $sexe;
+
+        return $this;
+    }
+
+    public function getAffixe(): ?Affixe
+    {
+        return $this->affixe;
+    }
+
+    public function setAffixe(?Affixe $affixe): self
+    {
+        $this->affixe = $affixe;
 
         return $this;
     }

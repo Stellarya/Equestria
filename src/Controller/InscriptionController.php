@@ -34,7 +34,7 @@ class InscriptionController extends AbstractController
             $em->flush();
         }
 
-        return $this->render("inscription/ajouter.html.twig",
+        return $this->render("inscription/_form.html.twig",
             ["form" => $form->createView()]);
 
     }
