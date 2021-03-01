@@ -25,14 +25,17 @@ class Robe
     private $libelle;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity=Couleur::class)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $criniere;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity=Couleur::class)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $corps;
+
 
     public function getId(): ?int
     {
@@ -51,27 +54,28 @@ class Robe
         return $this;
     }
 
-    public function getCriniere(): ?string
+    public function getCriniere(): ?Couleur
     {
         return $this->criniere;
     }
 
-    public function setCriniere(string $criniere): self
+    public function setCriniere(?Couleur $criniere): self
     {
         $this->criniere = $criniere;
 
         return $this;
     }
 
-    public function getCorps(): ?string
+    public function getCorps(): ?Couleur
     {
         return $this->corps;
     }
 
-    public function setCorps(string $corps): self
+    public function setCorps(?Couleur $corps): self
     {
         $this->corps = $corps;
 
         return $this;
     }
+
 }

@@ -1,0 +1,34 @@
+<div id="conteneurModale"></div>
+<div class="container-fluid">
+    <div class="box mt-2 p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>{{ title }}</h2>
+            <a href="#" class="btn btn-secondary btn-round">
+                <i class="fas fa-tint"></i>
+                <span>Ajouter Robe</span>
+            </a>
+        </div>
+        <table class="table table-striped table-hover"
+               id="tblRobe" width="100%">
+            <thead>
+            <tr>
+                <th class="d-none">ID</th>
+                <th>Robe</th>
+                <th>Couleur des crins</th>
+                <th>Couleur du corps</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for robe in robes %}
+                <tr>
+                    <td class="d-none">{{ robe.id }}</td>
+                    <td>{{ robe.libelle }}</td>
+                    <td>{{ robe.criniere }}</td>
+                    <td>{{ robe.corps }}</td>
+                </tr>
+            {% endfor %}
+            <tr></tr>
+            </tbody>
+        </table>
+    </div>
+</div>

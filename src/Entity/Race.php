@@ -31,6 +31,11 @@ class Race
      */
     private $chevaux;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $origine;
+
     public function __construct()
     {
         $this->chevaux = new ArrayCollection();
@@ -79,6 +84,18 @@ class Race
                 $chevaux->setRace(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getOrigine(): ?string
+    {
+        return $this->origine;
+    }
+
+    public function setOrigine(?string $origine): self
+    {
+        $this->origine = $origine;
 
         return $this;
     }

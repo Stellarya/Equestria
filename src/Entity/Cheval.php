@@ -70,6 +70,16 @@ class Cheval
      */
     private $affixe;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateNaissance;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateDeces;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -191,6 +201,30 @@ class Cheval
     public function setAffixe(?Affixe $affixe): self
     {
         $this->affixe = $affixe;
+
+        return $this;
+    }
+
+    public function getDateNaissance(): ?\DateTimeInterface
+    {
+        return $this->dateNaissance;
+    }
+
+    public function setDateNaissance(\DateTimeInterface $dateNaissance): self
+    {
+        $this->dateNaissance = $dateNaissance;
+
+        return $this;
+    }
+
+    public function getDateDeces(): ?\DateTimeInterface
+    {
+        return $this->dateDeces;
+    }
+
+    public function setDateDeces(?\DateTimeInterface $dateDeces): self
+    {
+        $this->dateDeces = $dateDeces;
 
         return $this;
     }

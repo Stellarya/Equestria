@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+{% block contenu %}
+    <h3 class="mt-2 ml-4">Ajouter une Robe</h3>
+    <!-- Modale Ajouter Idee -->
+    <div class="ml-4 mr-4">
+        {{ form_start(form, {'attr': {'class': 'form-inline'}}) }}
+        {{ form_errors(form) }}
+        <div class="col-12">
+            <h4>Identité</h4>
+            <div class="form-group mb-3 row">
+                <!-- Certification -->
+                <label class="col-1 col-form-label" for="idee_title">Nom
+                    <span class="required">*</span>
+                </label>
+                <div class="col-2">
+                    {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <label class="col-1 col-form-label" for="category">Affixe
+                    <span class="required">*</span>
+                </label>
+                <div class="col-2">
+                    {{ form_widget(form.affixe, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <h4>Race</h4>
+            <div class="form-group mb-3 row">
+
+                <label class="col-1 col-form-label" for="category">Race
+                    <span class="required">*</span>
+                </label>
+                <div class="col-2">
+                    {{ form_widget(form.race, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <label class="col-1 col-form-label" for="category">Pure Race
+                    <span class="required">*</span>
+                </label>
+                <div class="col-2">
+                    {{ form_widget(form.isPureRace, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <h4>Apparence</h4>
+            <div class="form-group mb-3 row">
+                <!-- Certification -->
+                <label class="col-1 col-form-label" for="idee_title">Poids
+                    <span class="required">*</span>
+                </label>
+                <div class="col-2">
+                    {{ form_widget(form.poids, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <label class="col-1 col-form-label" for="category">Taille
+                    <span class="required">*</span>
+                </label>
+                <div class="col-2">
+                    {{ form_widget(form.taille, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <label class="col-1 col-form-label" for="category">Robe
+                    <span class="required">*</span>
+                </label>
+                <div class="col-2">
+                    {{ form_widget(form.robe, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <h4>Reproduction</h4>
+            <div class="form-group mb-3 row">
+                <!-- Certification -->
+                <label class="col-1 col-form-label" for="idee_title">Sexe
+                    <span class="required">*</span>
+                </label>
+                <div class="col-2">
+                    {{ form_widget(form.sexe, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <label class="col-1 col-form-label" for="category">Reproducteur
+                    <span class="required">*</span>
+                </label>
+                <div class="col-2">
+                    {{ form_widget(form.isReproducteur, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center w-100 d-none d-sm-flex mt-4">
+        {{ form_widget(form.enregistrer, {'attr': {'class': 'btn btn-success'} }) }}
+        {{ form_end(form) }}
+    </div>
+    </div>
+{% endblock %}
