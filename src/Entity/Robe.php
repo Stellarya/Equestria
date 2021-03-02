@@ -19,20 +19,19 @@ class Robe
     private $id;
 
     /**
-     * @Assert\Unique(message="Robe déjà créée, veuillez en insérer une autre")
      * @ORM\Column(type="string", length=255)
      */
     private $libelle;
 
     /**
      * @ORM\ManyToOne(targetEntity=Couleur::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $criniere;
 
     /**
      * @ORM\ManyToOne(targetEntity=Couleur::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $corps;
 

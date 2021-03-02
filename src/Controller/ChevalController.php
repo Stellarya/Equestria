@@ -3,16 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Cheval;
-use App\Entity\Idea;
 use App\Form\ChevalType;
-use App\Form\IdeaType;
 use App\Repository\ChevalRepository;
-use App\Repository\RaceRepository;
-use App\Repository\RobeRepository;
-use Omines\DataTablesBundle\Adapter\ArrayAdapter;
-use Omines\DataTablesBundle\Column\NumberColumn;
-use Omines\DataTablesBundle\Column\TextColumn;
-use Omines\DataTablesBundle\DataTableFactory;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -97,7 +90,7 @@ class ChevalController extends AbstractController {
      * @param Request $request
      * @return RedirectResponse
      */
-    public function submitFormCheval (Request $request): RedirectResponse {
+    public function submitFormCheval (Request $request) {
         $oCheval = new Cheval();
 
         $form = $this->createForm(ChevalType::class, $oCheval);
@@ -110,7 +103,7 @@ class ChevalController extends AbstractController {
 
             $this->addFlash('success', "Idée ajoutée avec succès.");
             return $this->redirect(
-                $this->generateUrl('cheval_details', array('id' => $oCheval->getId()))
+                $this->generateUrl('cheval_index')
             );
 
 

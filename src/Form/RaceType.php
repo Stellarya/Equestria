@@ -14,7 +14,7 @@ class RaceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('libelle', TextType::class, array('attr' => array('maxLength' => 250)))
+            ->add('libelle', TextType::class)
             ->add('origine', TextType::class, array('attr' => array('maxLength' => 250)))
             ->add('enregistrer', SubmitType::class);
         ;

@@ -2,10 +2,12 @@
 
 namespace App\Form;
 
+use App\Entity\Affixe;
 use App\Entity\Cheval;
 use App\Entity\Race;
 use App\Entity\Robe;
 use App\Entity\Sexe;
+use App\Repository\AffixeRepository;
 use App\Repository\RaceRepository;
 use App\Repository\RobeRepository;
 use App\Repository\SexeRepository;
@@ -13,6 +15,7 @@ use Doctrine\DBAL\Types\BooleanType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -23,13 +26,14 @@ class ChevalType extends AbstractType {
     public function buildForm (FormBuilderInterface $builder, array $options) {
         $builder
             ->add('nom', TextType::class, array('attr' => array('maxLength' => 250)))
-            ->add('affixe', TextType::class, array('attr' => array('maxLength' => 250)))
+            ->add('dateNaissance', DateType::class, array('widget'=> 'single_text','format'=>'d/M/y', 'html5' => false))
             ->add('poids', IntegerType::class, array('required' => false))
             ->add('taille', IntegerType::class, array('required' => false))
             ->add('isPureRace', CheckboxType::class, array('required' => false))
             ->add('isReproducteur', CheckboxType::class, array('required' => false))
             ->add('enregistrer', SubmitType::class);
         $this->addRace($builder);
+        $this->addAffixe($builder);
         $this->addRobe($builder);
         $this->addSexe($builder);
     }
@@ -111,6 +115,32 @@ class ChevalType extends AbstractType {
                 },
                 'choice_label' => function ($sexe) {
                     return $sexe->getLibelle();
+                }));
+        }
+    }
+
+    private function addAffixe(FormBuilderInterface $builder)
+    {
+        $oCheval = $builder->getData();
+        $oAffixe = $oCheval->getAffixe();
+        if ($oCheval->getId() != NULL && $oAffixe) {
+            $builder->add('affixe', EntityType::class, array('class' => Affixe::class,
+                'query_builder' => function (AffixeRepository $r) use ($oAffixe) {
+                    return $r->createQueryBuilder('a')
+                        ->where('a.id=' . $oAffixe->getId())
+                        ->orderBy('a.libelle');
+                },
+                'choice_label' => function ($affixe) {
+                    return $affixe->getLibelle();
+                }));
+        } else {
+            $builder->add('affixe', EntityType::class, array('class' => Affixe::class,
+                'query_builder' => function (AffixeRepository $r) {
+                    return $r->createQueryBuilder('a')
+                        ->orderBy('a.libelle');
+                },
+                'choice_label' => function ($affixe) {
+                    return $affixe->getLibelle();
                 }));
         }
     }

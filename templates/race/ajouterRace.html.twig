@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block contenu %}
-    <h3 class="mt-2 ml-4">Ajouter une Robe</h3>
+    <h3 class="mt-2 ml-4">Ajouter une Race</h3>
     <!-- Modale Ajouter Idee -->
     <div class="ml-4 mr-4">
         {{ form_start(form, {'attr': {'class': 'form-inline'}}) }}
@@ -8,23 +8,17 @@
         <div class="col-12">
             <div class="form-group mb-3 row">
                 <!-- Certification -->
-                <label class="col-1 col-form-label" for="idee_title">Libelle
+                <label class="col-1 col-form-label" for="libelleRace">Nom Race
                     <span class="required">*</span>
                 </label>
                 <div class="col-2">
                     {{ form_widget(form.libelle, {'attr': {'class': 'form-control'}}) }}
                 </div>
-                <label class="col-1 col-form-label" for="category">Couleur des crins
+                <label class="col-1 col-form-label" for="origine">Origine
                     <span class="required">*</span>
                 </label>
                 <div class="col-2">
-                    {{ form_widget(form.criniere, {'attr': {'class': 'form-control'}}) }}
-                </div>
-                <label class="col-1 col-form-label" for="category">Couleur du corps
-                    <span class="required">*</span>
-                </label>
-                <div class="col-2">
-                    {{ form_widget(form.corps, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_widget(form.origine, {'attr': {'class': 'form-control'}}) }}
                 </div>
             </div>
         </div>

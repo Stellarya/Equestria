@@ -3,7 +3,7 @@
     <div class="box mt-2 p-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2>{{ title }}</h2>
-            <a href="#" class="btn btn-secondary btn-round">
+            <a href="{{ path('robe_add') }}" class="btn btn-secondary btn-round">
                 <i class="fas fa-tint"></i>
                 <span>Ajouter Robe</span>
             </a>
@@ -23,8 +23,8 @@
                 <tr>
                     <td class="d-none">{{ robe.id }}</td>
                     <td>{{ robe.libelle }}</td>
-                    <td>{{ robe.criniere }}</td>
-                    <td>{{ robe.corps }}</td>
+                    <td>{{ robe.criniere.libelle }}</td>
+                    <td>{{ robe.corps.libelle }}</td>
                 </tr>
             {% endfor %}
             <tr></tr>

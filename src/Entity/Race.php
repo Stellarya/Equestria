@@ -21,7 +21,6 @@ class Race
     private $id;
 
     /**
-     * @Assert\Unique(message="Race déjà créée, veuillez en insérer une autre")
      * @ORM\Column(type="string", length=255)
      */
     private $libelle;
