@@ -14,6 +14,8 @@
             <tr>
                 <th class="d-none">ID</th>
                 <th>Race</th>
+                <th>Origine</th>
+                <th>Type</th>
             </tr>
             </thead>
             <tbody>
@@ -21,6 +23,8 @@
                 <tr>
                     <td class="d-none">{{ race.id }}</td>
                     <td>{{ race.libelle }}</td>
+                    <td>{{ race.origine }}</td>
+                    <td>{{ race.typeRace.libelle }}</td>
                 </tr>
             {% endfor %}
             <tr></tr>

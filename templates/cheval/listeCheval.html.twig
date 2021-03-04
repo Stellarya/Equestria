@@ -32,8 +32,8 @@
                     <td>{{ cheval.affixe.libelle }}</td>
                     <td>
                         <i class="fas
-                                {% if cheval.sexe.id == 1 %} fa-mars
-                                {% elseif cheval.sexe.id == 2 %} fa-genderless
+                                {% if cheval.sexe.libelle == "Mâle" %} fa-mars
+                                {% elseif cheval.sexe.libelle == "Hongre" %} fa-genderless
                                 {% else %} fa-venus {% endif %}"></i>
                     </td>
                     <td><i class="fas {% if cheval.isReproducteur %} fa-check {% else %} fa-times {% endif %}"></i></td>

@@ -35,6 +35,11 @@ class Race
      */
     private $origine;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=TypeRace::class)
+     */
+    private $typeRace;
+
     public function __construct()
     {
         $this->chevaux = new ArrayCollection();
@@ -95,6 +100,18 @@ class Race
     public function setOrigine(?string $origine): self
     {
         $this->origine = $origine;
+
+        return $this;
+    }
+
+    public function getTypeRace(): ?TypeRace
+    {
+        return $this->typeRace;
+    }
+
+    public function setTypeRace(?TypeRace $typeRace): self
+    {
+        $this->typeRace = $typeRace;
 
         return $this;
     }

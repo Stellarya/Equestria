@@ -22,7 +22,7 @@ class ChevalController extends AbstractController {
     /**
      * @Route("/", name="_index")
      */
-    public function index (): Response {
+    public function index(): Response {
         return $this->render('cheval/index.html.twig', [
             'title' => 'Chevaux',
             'navItemValue' => 'Chevaux'
@@ -34,7 +34,7 @@ class ChevalController extends AbstractController {
      * @param ChevalRepository $chevalRepository
      * @return Response
      */
-    public function list (ChevalRepository $chevalRepository): Response {
+    public function list(ChevalRepository $chevalRepository): Response {
         $toCheval = $chevalRepository->findAll();
 
         return $this->render('cheval/listeCheval.html.twig', [
@@ -49,7 +49,7 @@ class ChevalController extends AbstractController {
      * @param ChevalRepository $chevalRepository
      * @return Response
      */
-    public function details (int $id, ChevalRepository $chevalRepository): Response {
+    public function details(int $id, ChevalRepository $chevalRepository): Response {
         $oCheval = $chevalRepository->find($id);
         $robe = $oCheval->getRobe()->getLibelle();
         $race = $oCheval->getRace()->getLibelle();
@@ -69,7 +69,7 @@ class ChevalController extends AbstractController {
      * @param Request $request
      * @return Response
      */
-    public function ajouter (Request $request): Response {
+    public function ajouter(Request $request): Response {
 
         $idEntity = $request->get('idEntity');
 
@@ -90,25 +90,30 @@ class ChevalController extends AbstractController {
      * @param Request $request
      * @return RedirectResponse
      */
-    public function submitFormCheval (Request $request) {
+    public function submitFormCheval(Request $request) {
         $oCheval = new Cheval();
 
         $form = $this->createForm(ChevalType::class, $oCheval);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($oCheval);
             $entityManager->flush();
 
-            $this->addFlash('success', "Idée ajoutée avec succès.");
+            if ($oCheval->getSexe()->getLibelle() == "Hongre") {
+                $oCheval->setIsReproducteur(false);
+            }
+
+            $this->addFlash('success', "Cheval ajoutée avec succès.");
             return $this->redirect(
                 $this->generateUrl('cheval_index')
             );
 
 
         } else {
-            $this->addFlash('danger', "Idée ne peux pas etre ajoutée.");
+            $this->addFlash('danger', "Cheval ne peux pas etre ajoutée.");
         }
     }
 
@@ -119,7 +124,7 @@ class ChevalController extends AbstractController {
      * @param ChevalRepository $chevalRepository
      * @return JsonResponse
      */
-    public function deleteAction ($idCheval, ChevalRepository $chevalRepository): JsonResponse {
+    public function delete($idCheval, ChevalRepository $chevalRepository): JsonResponse {
         $oCheval = $chevalRepository->find($idCheval);
 
         if ($oCheval) {
