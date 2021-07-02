@@ -26,6 +26,13 @@ body {
     z-index: 2;
 }
 
+#sidebar hr {
+    border-color: white;
+    width: 230px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #sidebar .sticky {
     position: fixed;
     top: 0;
@@ -51,9 +58,13 @@ body {
     width: 100%;
 }
 
-#sidebar .sticky .side-menu .nav-item {
-    width: 231px;
+#sidebar .sticky .side-menu .nav-item:hover {
+    background-color: #66000E;
+}
 
+#sidebar .sticky .side-menu .nav-item.active {
+    background-color: #66000E;
+    color: white;
 }
 
 #sidebar .sticky .side-menu .nav-item a {
@@ -63,7 +74,7 @@ body {
 }
 
 #sidebar .sticky .side-menu .nav-item a:hover {
-    color: #494949;
+    color: white;
     padding: 8px 10px 8px 22px;
     display: flex;
     text-decoration: none;
@@ -188,11 +199,15 @@ body {
     padding: 1rem;
 }
 
+.nav-tabs .nav-link:not(.active) {
+    color: #66000E;
+}
+
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-link:hover {
-    background: #66000E;
-    color: white
+    background: #66000E !important;
+    color: white !important;
 }
 
 .btn.btn-secondary {

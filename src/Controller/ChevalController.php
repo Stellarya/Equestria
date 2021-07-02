@@ -66,12 +66,9 @@ class ChevalController extends AbstractController {
      * @Route("/add", name="_add")
      * Renvoie la modale et les variables nécessaires
      *
-     * @param Request $request
      * @return Response
      */
-    public function ajouter(Request $request): Response {
-
-        $idEntity = $request->get('idEntity');
+    public function ajouter(): Response {
 
         $oCheval = new Cheval();
 

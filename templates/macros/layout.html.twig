@@ -4,7 +4,7 @@
     <div class="nav-item " title="{{ label }}" data-value="{{ label }}"
             {% if idItem != null %} id="{{ idItem }}"{% endif %}>
 
-        <a {% if link != null %}href="{{ path(link) }}" {% endif %}>
+        <a class="align-items-end" {% if link != null %}href="{{ path(link) }}" {% endif %}>
             <i class="{{ icon }}"></i>
             <span>{{ label }}</span>
         </a>

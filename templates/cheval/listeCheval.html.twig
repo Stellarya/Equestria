@@ -20,8 +20,7 @@
                 <th>Robe</th>
                 <th>Race</th>
                 <th>Pure Race</th>
-                <th>Poids</th>
-                <th>Taille</th>
+                <th>Type</th>
             </tr>
             </thead>
             <tbody>
@@ -40,8 +39,7 @@
                     <td>{{ cheval.robe.libelle }}</td>
                     <td>{{ cheval.race.libelle }}</td>
                     <td><i class="fas {% if cheval.isPureRace %} fa-check {% else %} fa-times {% endif %}"></i></td>
-                    <td>{{ cheval.poids }}</td>
-                    <td>{{ cheval.taille }}</td>
+                    <td>{{ cheval.race.typeRace.libelle }}</td>
                 </tr>
             {% endfor %}
             <tr></tr>
@@ -49,3 +47,18 @@
         </table>
     </div>
 </div>
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            $('#tblChevaux tbody').on('click', 'tr', function (e) {
+                let id = $(this).children(":first").text()
+                if (e.button === 0 && !e.ctrlKey && id !== undefined) {
+                    window.location.href = "/cheval/details/" + id;
+                } else if (id !== undefined && ((e.button === 0 && e.ctrlKey) || e.button === 1)) {
+                    window.open("/cheval/details/" + id);
+                }
+            })
+
+        });
+    </script>
+{% endblock %}

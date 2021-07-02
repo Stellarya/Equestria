@@ -4,33 +4,36 @@
     </a>
 </div>
 <nav class="side-menu side-menu-top fixed" style="width: 250px; margin-top: 90px">
-    {% import 'macros/layout.html.twig' as navItem %}
-    {{ navItem.navItem('fas fa-horse', 'Chevaux', 'cheval_index' ) }}
-    {{ navItem.navItem('fas fa-cog', 'Administration', 'admin_index') }}
+    {% import 'macros/layout.html.twig' as macros %}
+    {{ macros.navItem('fas fa-horse', 'Chevaux', 'cheval_index' ) }}
+    {{ macros.navItem('fas fa-cog', 'Administration', 'admin_index') }}
+    {{ macros.navItem('fas fa-users', 'Effectifs', 'effectifs_index') }}
+
+    <hr>
 
     {% if app.user %}
         {% set user = app.user.username %}
         <div class="nav-item" title="Tableau de Bord" data-value="dashboard" id="user">
-            <a href="#" class="align-items-baseline">
+            <a href="#" class="align-items-end">
                 <i class="fas fa-user"></i>
                 <span>{{ user }}</span>
             </a>
         </div>
         <div class="nav-item" title="Tableau de Bord" data-value="dashboard" id="deconnexion">
-            <a href="{{ path('app_logout') }}" class="align-items-baseline">
+            <a href="{{ path('app_logout') }}" class="align-items-end">
                 <i class="fas fa-user-slash"></i>
                 <span>Deconnexion</span>
             </a>
         </div>
     {% else %}
         <div class="nav-item" title="Tableau de Bord" data-value="dashboard" id="inscription">
-            <a href="{{ path('inscription') }}" class="align-items-baseline">
+            <a href="{{ path('inscription') }}" class="align-items-end">
                 <i class="fas fa-user-plus"></i>
                 <span>S'inscrire</span>
             </a>
         </div>
         <div class="nav-item" title="Tableau de Bord" data-value="dashboard" id="connexion">
-            <a href="{{ path('app_login') }}" class="align-items-baseline">
+            <a href="{{ path('app_login') }}" class="align-items-end">
                 <i class="fas fa-user"></i>
                 <span>Connexion</span>
             </a>

@@ -11,20 +11,15 @@
                 </h2>
                 {% import 'macros/layout.html.twig' as macros %}
                 <ul class="nav nav-tabs flex-fill" id="nav_tdb">
-                    {{ macros.navItemTabs('fas fa-horse', 'Cheval', 'listeCheval', 'active'  ) }}
-                    {{ macros.navItemTabs('fas fa-venus-mars', 'Reproduction', 'listeReproducteur', ''  ) }}
-                    {{ macros.navItemTabs('fas fa-venus-mars', 'Naissances', 'listeNaissance', ''  ) }}
+                    {{ macros.navItemTabs('fas id-card-alt', 'Personne', 'listePersonne', 'active'  ) }}
                 </ul>
             </div>
         </div>
 
         <!-- Tab panes -->
         <div class="tab-content">
-            <div class="tab-pane active" id="listeCheval">
-                {{ render(controller("App\\Controller\\ChevalController::list")) }}
-            </div>
-            <div class="tab-pane fade" id="ajouter">
-
+            <div class="tab-pane active" id="listeProprietaires">
+                {{ render(controller("App\\Controller\\EffectifController::list")) }}
             </div>
         </div>
     </div>
