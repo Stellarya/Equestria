@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ChevalRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -79,6 +81,38 @@ class Cheval
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateDeces;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Cheval::class, inversedBy="estMereDe")
+     */
+    private $mere;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Cheval::class, mappedBy="mere")
+     */
+    private $estMereDe;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Cheval::class, inversedBy="estPereDe")
+     */
+    private $pere;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Cheval::class, mappedBy="pere")
+     */
+    private $estPereDe;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Reproduction::class, inversedBy="poulain")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $reproduction;
+
+    public function __construct()
+    {
+        $this->estMereDe = new ArrayCollection();
+        $this->estPereDe = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -225,6 +259,102 @@ class Cheval
     public function setDateDeces(?\DateTimeInterface $dateDeces): self
     {
         $this->dateDeces = $dateDeces;
+
+        return $this;
+    }
+
+    public function getMere(): ?self
+    {
+        return $this->mere;
+    }
+
+    public function setMere(?self $mere): self
+    {
+        $this->mere = $mere;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getEstMereDe(): Collection
+    {
+        return $this->estMereDe;
+    }
+
+    public function addEstMereDe(self $estMereDe): self
+    {
+        if (!$this->estMereDe->contains($estMereDe)) {
+            $this->estMereDe[] = $estMereDe;
+            $estMereDe->setMere($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEstMereDe(self $estMereDe): self
+    {
+        if ($this->estMereDe->removeElement($estMereDe)) {
+            // set the owning side to null (unless already changed)
+            if ($estMereDe->getMere() === $this) {
+                $estMereDe->setMere(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getPere(): ?self
+    {
+        return $this->pere;
+    }
+
+    public function setPere(?self $pere): self
+    {
+        $this->pere = $pere;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getEstPereDe(): Collection
+    {
+        return $this->estPereDe;
+    }
+
+    public function addEstPereDe(self $estPereDe): self
+    {
+        if (!$this->estPereDe->contains($estPereDe)) {
+            $this->estPereDe[] = $estPereDe;
+            $estPereDe->setPere($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEstPereDe(self $estPereDe): self
+    {
+        if ($this->estPereDe->removeElement($estPereDe)) {
+            // set the owning side to null (unless already changed)
+            if ($estPereDe->getPere() === $this) {
+                $estPereDe->setPere(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getReproduction(): ?Reproduction
+    {
+        return $this->reproduction;
+    }
+
+    public function setReproduction(?Reproduction $reproduction): self
+    {
+        $this->reproduction = $reproduction;
 
         return $this;
     }

@@ -47,6 +47,16 @@ class Personne
      */
     private $ville;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $estCavalier;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $estProprietaire;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +130,30 @@ class Personne
     public function setVille(?string $ville): self
     {
         $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getEstCavalier(): ?bool
+    {
+        return $this->estCavalier;
+    }
+
+    public function setEstCavalier(bool $estCavalier): self
+    {
+        $this->estCavalier = $estCavalier;
+
+        return $this;
+    }
+
+    public function getEstProprietaire(): ?bool
+    {
+        return $this->estProprietaire;
+    }
+
+    public function setEstProprietaire(bool $estProprietaire): self
+    {
+        $this->estProprietaire = $estProprietaire;
 
         return $this;
     }
