@@ -29,6 +29,12 @@ class Affixe
      */
     private $chevaux;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Race::class, inversedBy="affixes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $race;
+
     public function __construct()
     {
         $this->chevaux = new ArrayCollection();
@@ -77,6 +83,18 @@ class Affixe
                 $chevaux->setAffixe(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRace(): ?Race
+    {
+        return $this->race;
+    }
+
+    public function setRace(?Race $race): self
+    {
+        $this->race = $race;
 
         return $this;
     }

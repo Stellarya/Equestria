@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+{% block contenu %}
+    <h3 class="mt-2 ml-4">Ajouter un Affixe</h3>
+    <!-- Modale Ajouter Idee -->
+    <div class="ml-4 mr-4">
+        {{ form_start(form, {'attr': {'class': 'form-inline'}}) }}
+        {{ form_errors(form) }}
+        <div class="col-12">
+            <div class="form-group mb-3 row">
+                <!-- Certification -->
+                <label class="col-1 col-form-label" for="libelleRace">Nom Affixe
+                    <span class="required">*</span>
+                </label>
+                <div class="col-2">
+                    {{ form_widget(form.libelle, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <label class="col-1 col-form-label" for="origine">Race
+                    <span class="required">*</span>
+                </label>
+                <div class="col-2">
+                    {{ form_widget(form.race, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center w-100 d-none d-sm-flex mt-4">
+        {{ form_widget(form.enregistrer, {'attr': {'class': 'btn btn-success'} }) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

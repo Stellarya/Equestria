@@ -40,9 +40,15 @@ class Race
      */
     private $typeRace;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Affixe::class, mappedBy="race")
+     */
+    private $affixes;
+
     public function __construct()
     {
         $this->chevaux = new ArrayCollection();
+        $this->affixes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -112,6 +118,36 @@ class Race
     public function setTypeRace(?TypeRace $typeRace): self
     {
         $this->typeRace = $typeRace;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Affixe[]
+     */
+    public function getAffixes(): Collection
+    {
+        return $this->affixes;
+    }
+
+    public function addAffix(Affixe $affix): self
+    {
+        if (!$this->affixes->contains($affix)) {
+            $this->affixes[] = $affix;
+            $affix->setRace($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAffix(Affixe $affix): self
+    {
+        if ($this->affixes->removeElement($affix)) {
+            // set the owning side to null (unless already changed)
+            if ($affix->getRace() === $this) {
+                $affix->setRace(null);
+            }
+        }
 
         return $this;
     }

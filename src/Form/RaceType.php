@@ -21,7 +21,6 @@ class RaceType extends AbstractType
             ->add('origine', TextType::class, array('attr' => array('maxLength' => 250)))
             ->add('enregistrer', SubmitType::class);
         $this->addTypeRace($builder);
-        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
