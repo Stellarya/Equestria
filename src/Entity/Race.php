@@ -45,10 +45,16 @@ class Race
      */
     private $affixes;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Robe::class)
+     */
+    private $robes;
+
     public function __construct()
     {
         $this->chevaux = new ArrayCollection();
         $this->affixes = new ArrayCollection();
+        $this->robes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -148,6 +154,30 @@ class Race
                 $affix->setRace(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Robe[]
+     */
+    public function getRobes(): Collection
+    {
+        return $this->robes;
+    }
+
+    public function addRobe(Robe $robe): self
+    {
+        if (!$this->robes->contains($robe)) {
+            $this->robes[] = $robe;
+        }
+
+        return $this;
+    }
+
+    public function removeRobe(Robe $robe): self
+    {
+        $this->robes->removeElement($robe);
 
         return $this;
     }

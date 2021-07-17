@@ -29,3 +29,17 @@ P
  templates/cheval/index.html.twig,8\8\88c2a379936769bff93909d40b14665fe6dfbd32
 R
 "templates/cheval/details.html.twig,c\6\c69f8dbe2e8d0c81d13dafe92a59d93670ea1555
+G
+src/Entity/Personne.php,d\f\dff31d231c07e25274c93581594777320d0203db
+H
+templates/base.html.twig,f\f\ffb3f1cfd73fdec1f0c80c63d0b5bbc1fff22022
+U
+%src/Controller/EffectifController.php,a\3\a31f3c92c15abe55154751ccd52ade901a3d3dec
+I
+src/Form/PersonneType.php,a\1\a1dd91ffa75a5dcdd2685e738d1ed4fba0771e61
+T
+$templates/effectif/ajouter.html.twig,9\1\91fc6d3f04fa84c57c960edf65ad4672a7f5f1f8
+G
+src/Form/ChevalType.php,5\6\56fcba1502ea3d91937fa7c47daf397cf79c1cc5
+R
+"templates/effectif/index.html.twig,4\8\485630cca004608d1a696b5fe18ee25fed984592

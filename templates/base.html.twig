@@ -8,6 +8,7 @@
 
         <link rel="stylesheet" href="{{ asset('lib/bootstrap-4.5.0-dist/css/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('lib/bootstrap-select-1.13.9/dist/css/bootstrap-select.min.css') }}">
+        <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
 
         <!-- Font Awesome -->
         <link rel="stylesheet" href="{{ asset('lib/font-awesome/css/all.css') }}">
@@ -20,7 +21,7 @@
         <script src="{{ asset('lib/jquery-3.5.1/jquery-3.5.1.min.js') }}"></script>
 
         <!-- Datatable -->
-        <link rel="stylesheet" type="text/css" href="{{ asset('lib/dataTables/datatables.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.css"/>
 
     {% endblock %}
 </head>
@@ -53,6 +54,8 @@
     <!-- Boostrap-select -->
     <script src="{{ asset('lib/bootstrap-select-1.13.9/dist/js/bootstrap-select.js') }}"></script>
 
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+
     <!-- JQuery UI - Pour l'auto completion -->
     <script src="{{ asset('lib/jquery-ui-1.12.1/jquery-ui.js') }}"></script>
     <!-- echarts -->
@@ -60,7 +63,7 @@
     <!-- font-awesome -->
     <script src="{{ asset('lib/font-awesome/js/all.js') }}"></script>
     <!--datatables-->
-    <script type="text/javascript" src="{{ asset('lib/dataTables/datatables.js') }}"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.js"></script>
 
     <!-- Popover-x - confirmation -->
     <script src="{{ asset('lib/Popover-X/js/bootstrap-popover-x.min.js') }}"></script>
